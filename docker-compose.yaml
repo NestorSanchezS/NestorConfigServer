@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  database:
+    image: mysql:8
+    ports:
+      - 3306:3306
+    volumes:
+      - ./scripts/db_schema.sql:/docker-entrypoint-initdb.d/initdb.sql
+      - dbdata:/var/lib/mysql
+    env_file:
+      - .database.env
+
+  api:
+    image: nestorsanchezz/intalnet_api:latest
+    ports:
+      - 3300:80
+    depends_on:
+      - database
+    env_file:
+      - .api.env
+
+  frontend:
+    image: nestorsanchezz/intalnet_frontend:latest
+    ports:
+      - 3100:3100
+    env_file:
+      - .frontend.env
+
+volumes:
+  dbdata:
