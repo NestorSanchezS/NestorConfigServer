@@ -14,7 +14,7 @@ services:
   api:
     image: nestorsanchezz/intalnet_api:latest
     ports:
-      - 3300:80
+      - 80:3300
     depends_on:
       - database
     env_file:
