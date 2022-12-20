@@ -6,7 +6,7 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - ./scripts/db_schema.sql:/docker-entrypoint-initdb.d/initdb.sql
+      - ./init-db:/docker-entrypoint-initdb.d/initdb.sql
       - dbdata:/var/lib/mysql
     env_file:
       - .database.env
