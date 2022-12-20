@@ -1,3 +1,5 @@
+docker compose pull api
+docker compose pull frontend
 docker compose up -d database 
 sleep 5
 docker compose up -d api
