@@ -1,3 +1,4 @@
 .api.env
 .frontend.env
 .database.env
+.env

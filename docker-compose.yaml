@@ -1,31 +1,49 @@
 version: "3.9"
 
 services:
+
+  reverse-proxy:
+    image: traefik:v2.7
+    ports:
+      - 80:80
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./traefik.yaml:/traefik.yaml
+
   database:
     image: mysql:8
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASS}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASS}
+      - MYSQL_DATABASE=${DB_NAME}
     ports:
       - 3306:3306
     volumes:
-      - ./init-db:/docker-entrypoint-initdb.d/initdb.sql
+      - ./init-db:/docker-entrypoint-initdb.d
       - dbdata:/var/lib/mysql
-    env_file:
-      - .database.env
 
   api:
     image: nestorsanchezz/intalnet_api:latest
+    labels:
+      - traefik.http.routers.intalnet-api.rule=Host(`api.${DOMAIN}`)
     ports:
       - 3300:3300
     depends_on:
       - database
+      - reverse-proxy
     env_file:
+      - .env
       - .api.env
 
   frontend:
     image: nestorsanchezz/intalnet_frontend:latest
+    labels:
+      - traefik.http.routers.intalnet-frontend.rule=Host(`${DOMAIN}`)
+    depends_on:
+      - api
     ports:
-      - 80:3100
-    env_file:
-      - .frontend.env
+      - 3100:3100
 
 volumes:
   dbdata:
