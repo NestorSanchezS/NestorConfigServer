@@ -51,7 +51,7 @@ services:
   portafolio:
     image: nestorsanchezz/portafolio:latest
     labels:
-      - traefik.http.routers.intalnet-frontend.rule=Host(`sancheznestor.com`)
+      - traefik.http.routers.portafolio.rule=Host(`sancheznestor.com`)
     ports:
       - 3000:3000
     env_file:
