@@ -54,6 +54,8 @@ services:
       - traefik.http.routers.intalnet-frontend.rule=Host(`sancheznestor.com`)
     ports:
       - 3000:3000
+    env_file:
+      - .portafolio.env
 
 volumes:
   dbdata:
