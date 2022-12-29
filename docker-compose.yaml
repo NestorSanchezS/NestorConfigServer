@@ -44,7 +44,7 @@ services:
     labels:
       - traefik.http.routers.intalnet-frontend.rule=Host(`intalnet.sancheznestor.com`)
     depends_on:
-      - api
+      - intalnet-api
     ports:
       - 3100:3100
 
