@@ -2,3 +2,4 @@
 .frontend.env
 .database.env
 .env
+.portafolio.env
