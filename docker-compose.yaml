@@ -23,10 +23,10 @@ services:
       - ./init-db:/docker-entrypoint-initdb.d
       - dbdata:/var/lib/mysql
 
-  api:
+  intalnet-api:
     image: nestorsanchezz/intalnet_api:latest
     labels:
-      - traefik.http.routers.intalnet-api.rule=Host(`api.${DOMAIN}`)
+      - traefik.http.routers.intalnet-api.rule=Host(`api.intalnet.sancheznestor.com`)
     ports:
       - 3300:3300
     depends_on:
@@ -39,14 +39,23 @@ services:
       - .env
       - .api.env
 
-  frontend:
+  intalnet-frontend:
     image: nestorsanchezz/intalnet_frontend:latest
     labels:
-      - traefik.http.routers.intalnet-frontend.rule=Host(`${DOMAIN}`)
+      - traefik.http.routers.intalnet-frontend.rule=Host(`intalnet.sancheznestor.com`)
     depends_on:
-      - api
+      - intalnet-api
     ports:
       - 3100:3100
+
+  portafolio:
+    image: nestorsanchezz/portafolio:latest
+    labels:
+      - traefik.http.routers.portafolio.rule=Host(`sancheznestor.com`)
+    ports:
+      - 3000:3000
+    env_file:
+      - .portafolio.env
 
 volumes:
   dbdata:

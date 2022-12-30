@@ -1,9 +1,11 @@
 #!/bin/bash
 
 # pull images
-docker compose pull api
-docker compose pull frontend
+docker compose pull intalnet-api
+docker compose pull intalnet-frontend
+docker compose pull portafolio
 
 # update backend and frontend
-docker compose up -d api
-docker compose up -d frontend
+docker compose up -d intalnet-api
+docker compose up -d intalnet-frontend
+docker compose up -d portafolio
