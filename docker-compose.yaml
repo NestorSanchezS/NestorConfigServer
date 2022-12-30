@@ -30,6 +30,7 @@ services:
     image: nestorsanchezz/intalnet_api:latest
     labels:
       - traefik.http.routers.intalnet-api.rule=Host(`api.intalnet.sancheznestor.com`)
+      - traefik.http.routers.intalnet-api.tls.certresolver=myresolver
     ports:
       - 3300:3300
     depends_on:
@@ -46,6 +47,7 @@ services:
     image: nestorsanchezz/intalnet_frontend:latest
     labels:
       - traefik.http.routers.intalnet-frontend.rule=Host(`intalnet.sancheznestor.com`)
+      - traefik.http.routers.intalnet-frontend.tls.certresolver=myresolver
     depends_on:
       - intalnet-api
     ports:
