@@ -15,6 +15,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./traefik.yaml:/traefik.yaml
       - ./acme.json:/acme.json
+      - ./traefik.log:/traefik.log
 
   database:
     image: mysql:8
