@@ -2,7 +2,7 @@
 
 # pull images
 docker compose pull intalnet-api
-docker compose pull intalnet-fronten
+docker compose pull intalnet-frontend
 docker compose pull portafolio
 
 # update backend and frontend
