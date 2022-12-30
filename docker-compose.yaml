@@ -7,10 +7,6 @@ services:
     ports:
       - 80:80
       - 443:443
-    labels:
-        - traefik.http.routers.traefik.entrypoints=websecure
-        - traefik.http.routers.traefik.tls=true
-        - traefik.http.routers.traefik.tls.certresolver=myresolver
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./traefik.yaml:/traefik.yaml
@@ -59,7 +55,6 @@ services:
     image: nestorsanchezz/portafolio:latest
     labels:
       - traefik.http.routers.portafolio.rule=Host(`sancheznestor.com`)
-      - traefik.http.routers.portafolio.tls=true
       - traefik.http.routers.portafolio.tls.certresolver=myresolver
     ports:
       - 3000:3000
