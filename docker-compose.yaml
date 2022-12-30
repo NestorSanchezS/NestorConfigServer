@@ -7,6 +7,9 @@ services:
     ports:
       - 80:80
       - 443:443
+    labels:
+        - traefik.http.routers.traefik.tls=true
+        - traefik.http.routers.traefik.tls.certresolver=myresolver
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./traefik.yaml:/traefik.yaml
