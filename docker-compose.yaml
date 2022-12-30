@@ -9,6 +9,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./traefik.yaml:/traefik.yaml
+      - ./acme.json:acme.json
 
   database:
     image: mysql:8
@@ -52,6 +53,8 @@ services:
     image: nestorsanchezz/portafolio:latest
     labels:
       - traefik.http.routers.portafolio.rule=Host(`sancheznestor.com`)
+      - traefik.http.routers.portafolio.tls=true
+      - traefik.http.routers.portafolio.tls.certresolver=myresolver
     ports:
       - 3000:3000
     env_file:

@@ -1,2 +1,18 @@
+
+entrypoints:
+  web:
+    address: ":80"
+  websecurity:
+    address: ":443"
+
+certificatesResolvers:
+  myresolver:
+    acme:
+      email: nesaenz69@gmail.com
+      storage: acme.json
+      httpChallenge:
+        # used during the challenge
+        entryPoint: web
+
 providers:
   docker: {}
