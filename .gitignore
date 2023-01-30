@@ -3,3 +3,5 @@
 .database.env
 .env
 .portafolio.env
+traefik.log
+acme.json

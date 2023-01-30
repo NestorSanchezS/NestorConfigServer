@@ -1,7 +1,6 @@
 version: "3.9"
 
 services:
-
   reverse-proxy:
     image: traefik:v2.7
     ports:
@@ -12,46 +11,6 @@ services:
       - ./traefik.yaml:/traefik.yaml
       - ./acme.json:/acme.json
       - ./traefik.log:/traefik.log
-
-  database:
-    image: mysql:8
-    environment:
-      - MYSQL_ROOT_PASSWORD=${DB_PASS}
-      - MYSQL_USER=${DB_USER}
-      - MYSQL_PASSWORD=${DB_PASS}
-      - MYSQL_DATABASE=intalnet
-    ports:
-      - 3306:3306
-    volumes:
-      - ./init-db:/docker-entrypoint-initdb.d
-      - dbdata:/var/lib/mysql
-
-  intalnet-api:
-    image: nestorsanchezz/intalnet_api:latest
-    labels:
-      - traefik.http.routers.intalnet-api.rule=Host(`api.intalnet.sancheznestor.com`)
-      - traefik.http.routers.intalnet-api.tls.certresolver=myresolver
-    ports:
-      - 3300:3300
-    depends_on:
-      - database
-      - reverse-proxy
-    environment:
-      - DB_HOST=database
-      - DB_NAME=intalnet
-    env_file:
-      - .env
-      - .api.env
-
-  intalnet-frontend:
-    image: nestorsanchezz/intalnet_frontend:latest
-    labels:
-      - traefik.http.routers.intalnet-frontend.rule=Host(`intalnet.sancheznestor.com`)
-      - traefik.http.routers.intalnet-frontend.tls.certresolver=myresolver
-    depends_on:
-      - intalnet-api
-    ports:
-      - 3100:3100
 
   portafolio:
     image: nestorsanchezz/portafolio:latest
