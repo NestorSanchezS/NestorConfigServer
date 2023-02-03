@@ -17,7 +17,7 @@ services:
     labels:
       - traefik.http.routers.portafolio.rule=Host(`sancheznestor.com`)
       - traefik.http.routers.portafolio.tls.certresolver=myresolver
-        - traefik.http.routers.portafolio.rule=(Host(`sancheznestor.com`) || Host(`www.sancheznestor.com`))
+      - traefik.http.routers.portafolio.rule=(Host(`sancheznestor.com`) || Host(`www.sancheznestor.com`))
     ports:
       - 3000:3000
     env_file:
